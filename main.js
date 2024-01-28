@@ -110,27 +110,33 @@ function play() {
 
 function gameLoop() {
 	
+	if(keysDown.includes(27) && prevKeys.includes(27)==false){
+		gameState = "newGame";
+	}
+	
 	switch(gameState) {
 		case "newGame":
+			for(var i=0;i<defaultPlayers.length; i++){
+				defaultPlayers.Score = 0;
+			}
+			
 			//new keypress
 			if(keysDown.length > prevKeys.length) {
-				for(var i=0; i<defaultPlayers.length; i++)  {
-					if(defaultPlayers[i].LeftKey == "  ") {
-						
-						//console.log("found player")
-						defaultPlayers[i].LeftKey = keysDown.filter(function f(val) {
-							return !prevKeys.includes(val);
-						})[0];
-						//console.log(JSON.parse(JSON.stringify(defaultPlayers)));
-						defaultPlayers[i].RightKey = "  ";
-						
-					} else if(defaultPlayers[i].RightKey == "  ") {
-						
-						defaultPlayers[i].RightKey = keysDown.filter(function f(val) {
-							return !prevKeys.includes(val);
-						})[0];
-						//console.log(JSON.parse(JSON.stringify(defaultPlayers)));
+				const newKey = keysDown.filter(function f(val) {
+					return !prevKeys.includes(val);
+				})[0];
+				if(keycodeToChar(newKey) != null) {
+					for(var i=0; i<defaultPlayers.length; i++)  {
+						if(defaultPlayers[i].LeftKey == "  ") {
+							defaultPlayers[i].LeftKey = newKey;
+							defaultPlayers[i].RightKey = "  ";
+							
+						} else if(defaultPlayers[i].RightKey == "  ") {
+							defaultPlayers[i].RightKey = newKey;
+						}
 					}
+				} else if(newKey == 32) {
+					play();
 				}
 			}
 		
@@ -143,8 +149,7 @@ function gameLoop() {
 			for(var i=0; i<players.length; i++) {
 				players[i].spawn(100 + 800*Math.random(), 100 + 800*Math.random(), 2*Math.PI*Math.random());
 			}
-			powerUps = [new powerUp("allSides", 550, 550)];
-			spawnPowerUp(3);
+			powerUps = [];
 			gameState = "pause";
 		break;
 		
@@ -161,6 +166,7 @@ function gameLoop() {
 			}
 			prevKeys = keysDown.slice();
 			
+			//update players
 			for(var i=0; i< players.length; i++){
 				if(players[i].alive) {
 					players[i].move(keysDown);
@@ -205,8 +211,12 @@ function gameLoop() {
 				}
 			}
 			
+			//spawn powerups
+			if(Math.random() > 0.999) {
+				spawnPowerUp(Math.floor(4*Math.random()));
+			}
 			
-			
+			//check if win
 			var alive = 0;
 			for(var i=0; i<players.length; i++) {
 				if(players[i].alive) {
@@ -228,7 +238,8 @@ function gameLoop() {
 					gameState = "roundOver";
 				}
 			}
-			
+			//run delay loop
+			delayLoop
 		break;
 		
 		case "roundOver":
@@ -240,16 +251,14 @@ function gameLoop() {
 		
 		case "gameOver":
 			if(keysDown.includes(32) && prevKeys.includes(32)==false){
-				gameState = "newGame"
+				gameState = "newGame";
 			}
 			prevKeys = keysDown.slice();
 		break;
 	}
 	
-	
-	
 }
-gameTick = setInterval(gameLoop, 5); //100Hz gameloop
+gameTick = setInterval(gameLoop, 5); //200Hz gameloop
 
 function playerSort(){
 	players.sort(function(a, b) {
@@ -266,7 +275,9 @@ function playerSort(){
 var keysDown = [];
 document.body.onkeydown = function(event) {
 	var key = event.which || event.keyCode; //stores the key as a variable
-	
+	if(keycodeToChar(key) != null || 32) {
+		event.preventDefault();
+	}
 	if(!keysDown.includes(key)) {
 		keysDown.push(key);
 	}
@@ -426,8 +437,8 @@ function animationLoop() {
 				ctx.fillStyle = defaultPlayers[i].Color;
 				ctx.fillText(i+1, 100, 300 + 90*i);
 				ctx.fillText(defaultPlayers[i].Name, 200, 300 + 90*i);
-				ctx.fillText(defaultPlayers[i].LeftKey, 700, 300 + 90*i);
-				ctx.fillText(defaultPlayers[i].RightKey, 1000, 300 + 90*i);
+				ctx.fillText(keycodeToChar( defaultPlayers[i].LeftKey ), 700, 300 + 90*i);
+				ctx.fillText(keycodeToChar( defaultPlayers[i].RightKey ), 1000, 300 + 90*i);
 				
 				if(defaultPlayers[i].LeftKey == " " && defaultPlayers[i].RightKey == " ") {
 					ctx.fillStyle = `rgba(0, 0, 0, 0.8)`;
@@ -464,6 +475,7 @@ function animationLoop() {
 	fps = fps+1;
 }
 animationLoop();
+
 
 document.getElementById("playBtn").addEventListener('mouseover', function() {
 	playeBtnHover = true;

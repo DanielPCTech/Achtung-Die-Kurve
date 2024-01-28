@@ -16,7 +16,7 @@ function delay(fun, param, lag) {
 
 function delayLoop() {
 	for(var i=0; i<delayList.length; i++) {
-		delayList[i] -= 10;
+		delayList[i] -= 5;
 		if(delayList[i] <= 0) {
 			console.log(paramList[i]);
 			functionList[i].call(null, paramList[i]);
@@ -37,7 +37,7 @@ function delayLoop() {
 	});
 	
 }
-delayTick = setInterval(delayLoop, 10);
+//delayTick = setInterval(delayLoop, 10);
 
 function clearDelayCalls() {
 	functionList = [];
