@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> Achtung die kurve!</title>
+		<link rel="icon" type="image/x-icon" href="favicon.png">
+		<meta name="creator" content="Daniel Eliasson">
+		
+		<script src="delay.js" defer></script>
+		<script src="powerUps.js" defer></script>
+		<script src="playerClass.js" defer></script>
+		<script src="main.js" defer></script>
+		<audio id="backgroundMusic" src="freshsparksmono.mp3"></audio>
+	</head>
+	
+	<body id="body"style="background-color:#111111; overflow:show">
+		<!--	Acthung is life!-->
+		<button id="musicBtn" onclick="playAudio()" type="button" style="position:fixed; z-index:2; opacity: 0; cursor: pointer;">Play Audio</button>
+		<button id="playBtn" onclick="play()" type="button" style="position:fixed; z-index:2; opacity: 0; cursor: pointer;">Play</button>
+		<canvas id="game" style="background-color: black; #00000050; position:fixed; z-index:1;" ></canvas>
+		<!--<img src="shrek.jfif" style="position:fixed; top:0; left:10%; z-index:0; height:100%">-->
+		
+	</body>
+
+
+</html>
