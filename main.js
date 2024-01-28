@@ -11,17 +11,17 @@ const ctx = canvas.getContext("2d");
 
 
 // AUDIO section
-var mute = true;
+var musicMute = true;
 const audio = document.getElementById("backgroundMusic");
 function playAudio() {
 	//console.log(players[0].kurveArray.slice())// +" ");
 	//console.log(powerUps);
 	dead = false;
-	if(mute) {
-		mute = false;
+	if(musicMute) {
+		musicMute = false;
 		audio.play();
 	} else {
-		mute = true;
+		musicMute = true;
 		audio.pause();
 	}
 } 
@@ -239,7 +239,7 @@ function gameLoop() {
 				}
 			}
 			//run delay loop
-			delayLoop
+			delayLoop();
 		break;
 		
 		case "roundOver":
@@ -332,7 +332,7 @@ function animationLoop() {
 	ctx.textAlign = "center";
 	ctx.fillStyle = "yellow";
 	ctx.font = "30px" + font;
-	if(mute) {
+	if(musicMute) {
 		ctx.fillText("Music: off", 1170, 920);
 	} else {
 		ctx.fillText("Music: on", 1170, 920);
