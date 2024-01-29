@@ -44,6 +44,7 @@ function powerUpFx() {
 var musicMute = true;
 const audio = document.getElementById("backgroundMusic");
 function playAudio() {
+	console.log(players);
 	if(musicMute) {
 		musicMute = false;
 		audio.play();
@@ -256,9 +257,11 @@ function gameLoop() {
 				var topScore = 0;
 				var secondTopScore = 0;
 				for(var i=0; i<players.length; i++) {
-					if(players[i].Score > topScore) {
-						secondTopScore = topScore;
+					if(players[i].Score >= topScore) {
+						secondTopScore = JSON.parse(JSON.stringify(topScore));
 						topScore = players[i].Score;
+					} else if(players[i].Score >= secondTopScore) {
+						secondTopScore = players[i].Score;
 					}
 				}
 				if( (topScore >=10*(players.length-1)) && topScore -2 >= secondTopScore) {
