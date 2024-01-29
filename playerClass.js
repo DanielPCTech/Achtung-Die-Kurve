@@ -28,9 +28,6 @@ class player {
 		this.angle = angle;
 		this.X = X;
 		this.Y = Y;
-		this.kurveArray = [	"straight", [X, Y, this.thickness, this.speed, this.angle], [X, Y, this.thickness, this.speed, this.angle]];
-		this.kurveArray[1][0] -=20*Math.cos(this.angle);
-		this.kurveArray[1][1] -=20*Math.sin(this.angle);	
 		this.turnSpeed = 10*Math.PI/ 1000; // how many 1 ms it take to complete a half loop
 		this.speed = 0.5;
 		this.hole = 0;
@@ -40,6 +37,9 @@ class player {
 		this.sides = 0;
 		this.alive = true;
 		this.blinkTime = 0;
+		this.kurveArray = [	"straight", [X, Y, this.thickness, this.speed, this.angle], [X, Y, this.thickness, this.speed, this.angle]];
+		this.kurveArray[1][0] -=20*Math.cos(this.angle);
+		this.kurveArray[1][1] -=20*Math.sin(this.angle);	
 	}
 	
 	
