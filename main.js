@@ -9,14 +9,41 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 
-
 // AUDIO section
+var fxMute = true;
+const soundfx = document.getElementById("soundEffects");
+function playsoundFx() {
+	if(fxMute) {
+		fxMute = false;
+	} else {
+		fxMute = true;
+		audio.pause();
+	}
+} 
+
+function deathFx() {
+	if(!fxMute) {
+		soundfx.src = "death.mp3";
+		soundfx.pause();
+		soundfx.load();
+		soundfx.play();
+	}
+}
+
+function powerUpFx() {
+	if(!fxMute) {
+		soundfx.src = "powerUp.mp3";
+		soundfx.pause();
+		soundfx.load();
+		soundfx.play();
+	}
+}
+
+
+//background track
 var musicMute = true;
 const audio = document.getElementById("backgroundMusic");
 function playAudio() {
-	//console.log(players[0].kurveArray.slice())// +" ");
-	//console.log(powerUps);
-	dead = false;
 	if(musicMute) {
 		musicMute = false;
 		audio.play();
@@ -145,7 +172,7 @@ function gameLoop() {
 		
 		case "newRound":
 			clearDelayCalls();
-			sides = 0
+			sides = 0;
 			for(var i=0; i<players.length; i++) {
 				players[i].spawn(100 + 800*Math.random(), 100 + 800*Math.random(), 2*Math.PI*Math.random());
 			}
@@ -195,12 +222,14 @@ function gameLoop() {
 							if(powerUps[j].collision(x,y)) {
 								powerUps[j].use(players, i);
 								powerUps.splice(j, 1);
+								powerUpFx();
 								break;
 							}
 						}
 					}
 				
 					if(players[i].alive == false) { // new death
+						deathFx();
 						for(var j=0; j< players.length; j++){
 							if(players[j].alive) {
 								players[j].Score += 1;
@@ -328,19 +357,30 @@ function animationLoop() {
 	ctx.scale(s, s);
 	
 	
-	
+	//music button
 	ctx.textAlign = "center";
 	ctx.fillStyle = "yellow";
 	ctx.font = "30px" + font;
 	if(musicMute) {
-		ctx.fillText("Music: off", 1170, 920);
+		ctx.fillText("Music: off", 1170, 870);
 	} else {
-		ctx.fillText("Music: on", 1170, 920);
+		ctx.fillText("Music: on", 1170, 870);
 	}
 	var btn = document.getElementById("musicBtn");
-	btn.style.top = parseFloat(canvas.style.top) + s*890 + "px";
+	btn.style.top = parseFloat(canvas.style.top) + s*840 + "px";
 	btn.style.left = parseFloat(canvas.style.left) + 1090*s +"px";
 	btn.style.width = s*160 + "px";
+	btn.style.height = s*40 + "px";
+	//sound fx button
+	if(fxMute) {
+		ctx.fillText("Sound Fx: off", 1170, 920);
+	} else {
+		ctx.fillText("Sound Fx: on", 1170, 920);
+	}
+	var btn = document.getElementById("fxBtn");
+	btn.style.top = parseFloat(canvas.style.top) + s*890 + "px";
+	btn.style.left = parseFloat(canvas.style.left) + 1070*s +"px";
+	btn.style.width = s*200 + "px";
 	btn.style.height = s*40 + "px";
 	
 	
@@ -408,7 +448,7 @@ function animationLoop() {
 				ctx.rotate((-15)*Math.PI/180);
 				//ctx.fillStyle = "#000000";
 				//ctx.clearRect(-200, 500, 1500, 200);
-				ctx.font = "180px" + font;
+				ctx.font = "160px" + font;
 				ctx.fillStyle = winner.Color;
 				ctx.fillText(winner.Name + " wins!", 0, 60);
 				ctx.strokeStyle = `rgba(0, 0, 0, 0.5)`;
