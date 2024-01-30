@@ -45,6 +45,8 @@ var musicMute = true;
 const audio = document.getElementById("backgroundMusic");
 function playAudio() {
 	console.log(players);
+	console.log(path)
+	console.log(audio.src);
 	if(musicMute) {
 		musicMute = false;
 		audio.play();
