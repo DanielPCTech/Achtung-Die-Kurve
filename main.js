@@ -1,7 +1,8 @@
 //creator : Daniel Eliasson
 
 var path = window.location.href;
-path = path.slice(0, path.length - 10);
+path1 = path.slice(0, path.length - 10); // local files website
+path2 = path.slice(0, path.length); // broadcasted website
 //console.log(path);
 font = " Comic Sans MS";
 
@@ -45,7 +46,8 @@ var musicMute = true;
 const audio = document.getElementById("backgroundMusic");
 function playAudio() {
 	console.log(players);
-	console.log(path)
+	console.log(path1)
+	console.log(path2)
 	console.log(audio.src);
 	if(musicMute) {
 		musicMute = false;
@@ -59,9 +61,9 @@ function playAudio() {
 
 //auto change track
 function nextTrack() {
-	if(audio.src == path +"freshsparksmono.mp3") {
+	if(audio.src == path1 +"freshsparksmono.mp3" || audio.src == path2 +"freshsparksmono.mp3") {
 		audio.src = "ontherunmono.mp3";
-	} else if(audio.src == path +"ontherunmono.mp3") {
+	} else if(audio.src == path1 +"ontherunmono.mp3" || audio.src == path2 +"ontherunmono.mp3") {
 		audio.src = "timetogomono.mp3";
 	} else {
 		audio.src = "freshsparksmono.mp3"
