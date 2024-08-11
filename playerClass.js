@@ -204,12 +204,7 @@ class player {
 	
 	
 	
-	checkCollision(X, Y) {
-		
-		if(this.hole != 0) {
-			return;
-		}
-		
+	checkCollision(X, Y) {		
 		var arrLength = this.kurveArray.length;
 		if(X == this.X && Y == this.Y) {
 			arrLength -= 3;

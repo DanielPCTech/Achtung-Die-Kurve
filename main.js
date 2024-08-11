@@ -151,7 +151,8 @@ function gameLoop() {
 	switch(gameState) {
 		case "newGame":
 			for(var i=0;i<defaultPlayers.length; i++){
-				defaultPlayers.Score = 0;
+				//players.Score = 0;
+				defaultPlayers[i].Score = 0;
 			}
 			
 			//new keypress
@@ -221,9 +222,12 @@ function gameLoop() {
 								players[i].alive = false;
 							}
 						}
-						for(var j=0; j< players.length; j++){
-							if(players[j].checkCollision(x,y)) {
-								players[i].alive = false;
+						
+						if(players[i].hole == 0) {
+							for(var j=0; j< players.length; j++){
+								if(players[j].checkCollision(x,y)) {
+									players[i].alive = false;
+								}
 							}
 						}
 						
