@@ -206,12 +206,14 @@ function gameLoop() {
 					players[i].move(keysDown);
 					players[i].crossWalls(sides > 0);
 					
-					for(var a = -Math.PI/2; a<=Math.PI/2; a+= Math.PI/4) {
+					for(var a = -Math.PI/3; a<=Math.PI/3; a+= Math.PI/3) {
+						
 						var x = players[i].X + players[i].thickness*Math.cos(players[i].angle +a)/2;
 						var y = players[i].Y + players[i].thickness*Math.sin(players[i].angle +a)/2;
-						if(Math.abs(a) > 0.1) {
-							x += players[i].thickness*Math.cos(players[i].angle)/3;
-							y += players[i].thickness*Math.sin(players[i].angle)/3;
+						
+						if(players[i].grid) {
+							x = players[i].X + players[i].thickness*Math.cos(players[i].angle)/2;
+							y = players[i].Y + players[i].thickness*Math.sin(players[i].angle)/2;
 						}
 						
 						if(players[i].checkWalls(x, y)) {
