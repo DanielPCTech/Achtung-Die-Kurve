@@ -440,7 +440,7 @@ class player {
 			ctx.beginPath();
 			ctx.strokeStyle = "#000000";
 			ctx.lineWidth = .3;
-			ctx.arc(this.X,this.Y, 1+this.thickness/2, 0, 2*Math.PI);
+			ctx.arc(this.X,this.Y, 0.3+this.thickness/2, 0, 2*Math.PI);
 			ctx.closePath();
 			ctx.stroke();
 		} else {

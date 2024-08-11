@@ -189,6 +189,9 @@ function gameLoop() {
 		break;
 		
 		case "pause":
+			var tmp = new powerUp("oppGrid", -200, -200);
+			tmp.use(players, "ahh");
+		
 			if(keysDown.includes(32) && prevKeys.includes(32)==false){
 				gameState = "play";
 			}
@@ -527,7 +530,7 @@ function animationLoop() {
 			
 			ctx.font = "20px" + font;
 			ctx.fillStyle = `rgb(180, 180, 0)`;
-			ctx.fillText("Version: 0.11", 10, 990);
+			ctx.fillText("Version: 0.12", 10, 990);
 		break;
 		
 	}	

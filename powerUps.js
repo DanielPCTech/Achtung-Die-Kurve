@@ -136,6 +136,7 @@ class powerUp {
 	}
 	
 	drawBase() {
+		ctx.lineWidth = 1;
 		ctx.translate(this.X, this.Y);
 		ctx.scale(0.2, 0.2)
 		ctx.beginPath();
