@@ -523,7 +523,7 @@ function animationLoop() {
 			
 			ctx.font = "20px" + font;
 			ctx.fillStyle = `rgb(180, 180, 0)`;
-			ctx.fillText("Version: 0.1", 10, 990);
+			ctx.fillText("Version: 0.11", 10, 990);
 		break;
 		
 	}	

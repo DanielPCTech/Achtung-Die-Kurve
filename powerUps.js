@@ -46,7 +46,7 @@ class powerUp {
 				delay(players[playerId].changeSpeed.bind(players[playerId]), 1/2, 4000);
 			break;
 			case "hole":
-				players[playerId].changeHole(2000/10);
+				players[playerId].changeHole(2000/1);
 			break;
 			case "more":
 				spawnPowerUp(3);
@@ -98,13 +98,13 @@ class powerUp {
 				for(var i=0; i<players.length; i++) {
 					if(i != playerId) {
 						players[i].changeThickness(2);
-						delay(players[i].changeThickness.bind(players[i]), 1/2, 4000);
+						delay(players[i].changeThickness.bind(players[i]), 1/2, 8000);
 					}
 				}
 			break;
 			case "meThick":
 				players[playerId].changeThickness(2);
-				delay(players[playerId].changeThickness.bind(players[playerId]), 1/2, 4000);
+				delay(players[playerId].changeThickness.bind(players[playerId]), 1/2, 8000);
 			break;
 			case "oppThin":
 				for(var i=0; i<players.length; i++) {
