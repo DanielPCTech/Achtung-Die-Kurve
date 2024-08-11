@@ -210,8 +210,12 @@ class player {
 			return;
 		}
 		
+		var arrLength = this.kurveArray.length;
+		if(X == this.X && Y == this.Y) {
+			arrLength -= 3;
+		}
 		
-		for(var i=0; i<this.kurveArray.length; i+=3) {
+		for(var i=0; i<arrLength; i+=3) {
 			if(this.kurveArray[i] == "straight") {//straight
 				const thickness = this.kurveArray[i+1][2];
 				const angle = - this.kurveArray[i+2][4];
@@ -440,12 +444,11 @@ class player {
 			//outline
 			ctx.beginPath();
 			ctx.strokeStyle = "#000000";
-			ctx.lineWidth = 1;
+			ctx.lineWidth = .3;
 			ctx.arc(this.X,this.Y, 1+this.thickness/2, 0, 2*Math.PI);
 			ctx.closePath();
 			ctx.stroke();
 		} else {
-			const size = 4;
 			ctx.save();
 			ctx.translate(this.X, this.Y);
 			ctx.rotate(this.angle);
@@ -453,7 +456,7 @@ class player {
 			//outlie
 			ctx.beginPath();
 			ctx.strokeStyle = "#000000";
-			ctx.lineWidth = 1;
+			ctx.lineWidth = .3;
 			ctx.strokeRect(-0.5-this.thickness/2,-0.5-this.thickness/2,1+this.thickness,1+this.thickness);
 			ctx.restore();
 		}

@@ -24,7 +24,7 @@ function playsoundFx() {
 
 function deathFx() {
 	if(!fxMute) {
-		soundfx.src = "death.mp3";
+		soundfx.src = "soundfx/death.mp3";
 		soundfx.pause();
 		soundfx.load();
 		soundfx.play();
@@ -33,7 +33,7 @@ function deathFx() {
 
 function powerUpFx() {
 	if(!fxMute) {
-		soundfx.src = "powerUp.mp3";
+		soundfx.src = "soundfx/powerUp.mp3";
 		soundfx.pause();
 		soundfx.load();
 		soundfx.play();
@@ -61,17 +61,19 @@ function playAudio() {
 
 //auto change track
 function nextTrack() {
-	if(audio.src == path1 +"freshsparksmono.mp3" || audio.src == path2 +"freshsparksmono.mp3") {
-		audio.src = "ontherunmono.mp3";
-	} else if(audio.src == path1 +"ontherunmono.mp3" || audio.src == path2 +"ontherunmono.mp3") {
-		audio.src = "timetogomono.mp3";
+	if(audio.src == path1 +"music/freshsparksmono.mp3" || audio.src == path2 +"music/freshsparksmono.mp3") {
+		audio.src = "music/ontherunmono.mp3";
+	} else if(audio.src == path1 +"music/ontherunmono.mp3" || audio.src == path2 +"music/ontherunmono.mp3") {
+		audio.src = "music/timetogomono.mp3";
 	} else {
-		audio.src = "freshsparksmono.mp3"
+		audio.src = "music/freshsparksmono.mp3"
 	}
 	audio.load();
 	audio.play();
 }
 audio.onended = function() {nextTrack()};
+
+
 
 
 function spawnPowerUp(num) {
@@ -204,7 +206,7 @@ function gameLoop() {
 					players[i].move(keysDown);
 					players[i].crossWalls(sides > 0);
 					
-					for(var a = -Math.PI/3; a<=Math.PI/3; a+= Math.PI/3) {
+					for(var a = -Math.PI/2; a<=Math.PI/2; a+= Math.PI/4) {
 						var x = players[i].X + players[i].thickness*Math.cos(players[i].angle +a)/2;
 						var y = players[i].Y + players[i].thickness*Math.sin(players[i].angle +a)/2;
 						if(Math.abs(a) > 0.1) {
