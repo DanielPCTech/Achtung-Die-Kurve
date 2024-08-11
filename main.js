@@ -518,6 +518,10 @@ function animationLoop() {
 			}
 			//ctx.strokeStyle = `rgba(255, 255, 255, 0.5)`;
 			//ctx.strokeRect(590, 920, 140, -80)
+			
+			ctx.font = "20px" + font;
+			ctx.fillStyle = `rgb(180, 180, 0)`;
+			ctx.fillText("Version: 0.1", 10, 990);
 		break;
 		
 	}	
