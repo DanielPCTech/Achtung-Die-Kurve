@@ -189,9 +189,6 @@ function gameLoop() {
 		break;
 		
 		case "pause":
-			var tmp = new powerUp("oppGrid", -200, -200);
-			tmp.use(players, "ahh");
-		
 			if(keysDown.includes(32) && prevKeys.includes(32)==false){
 				gameState = "play";
 			}
